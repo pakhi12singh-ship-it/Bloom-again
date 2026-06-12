@@ -1,0 +1,60 @@
+mkdir -p /home/claude/bloom-again/src
+
+# package.json
+cat > /home/claude/bloom-again/package.json << 'EOF'
+{
+  "name": "bloom-again",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^4.4.0"
+  }
+}
+EOF
+
+# vite config
+cat > /home/claude/bloom-again/vite.config.js << 'EOF'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+export default defineConfig({ plugins: [react()] })
+EOF
+
+# index.html
+cat > /home/claude/bloom-again/index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloom Again</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+EOF
+
+# main.jsx
+cat > /home/claude/bloom-again/src/main.jsx << 'EOF'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+EOF
+
+# Copy the app
+cp /mnt/user-data/outputs/bloom-again.jsx /home/claude/bloom-again/src/App.jsx
+
+echo "Done!"
+ls /home/claude/bloom-again/
